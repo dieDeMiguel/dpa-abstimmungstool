@@ -3,7 +3,7 @@ CREATE TABLE images (
     author VARCHAR(255) NOT NULL,
     width INTEGER,
     height INTEGER,
-    url VARCHAR(255) NOT NULL
+    download_url VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE users (

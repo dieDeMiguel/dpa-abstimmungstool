@@ -1,9 +1,11 @@
-const spicedPg = await import("spiced-pg");
+const spicedPg = require("spiced-pg");
 
-const { DATABASE_URL } = await import("./secrets.json");
+const {DATABASE_URL} = require("./secrets.json");
+
+console.log("DB URL", DATABASE_URL);
 
 const db = spicedPg(DATABASE_URL);
-const DEFAULT_LIMIT = 20;
+const DEFAULT_LIMIT = 5;
 
 function getImages() {
   return db
@@ -11,14 +13,14 @@ function getImages() {
     .then((results) => results.rows);
 }
 
-// function createImage({ url, username, title, description }) {
-//   return db
-//     .query(
-//       `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) returning *`,
-//       [url, username, title, description]
-//     )
-//     .then((result) => result.rows[0]);
-// }
+function createImage({ url, username, title, description }) {
+  return db
+    .query(
+      `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) returning *`,
+      [url, username, title, description]
+    )
+    .then((result) => result.rows[0]);
+}
 
 // function getImageByID(id) {
 //   return db
@@ -59,6 +61,7 @@ function getImages() {
 
 module.exports = {
   getImages,
+  createImage,
   //   createImage,
   //   getImageByID,
   //   addCommentToImage,

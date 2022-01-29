@@ -21,9 +21,9 @@
     "src",
     "cypress",
     "**/*.{d.ts,ts,tsx,mdx}",
-    "src/db.js",
-    "secrets.js"
+    "src/dbQueries.js",
+    "src/secrets.json"
   ],
-  "exclude": ["*.test", "*.spec.js", "import.ts", "src/db.js"],
+  "exclude": ["*.test", "*.spec.js", "import.ts", "src/dbQueries.js"],
   "files": ["index.d.ts", "emotion.d.ts"]
 }

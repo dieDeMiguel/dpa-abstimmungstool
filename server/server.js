@@ -1,25 +1,24 @@
 const express = require("express");
 const app = express();
-// const { getImages } = "../src/db.js";
+const dbQueries = require("../src/dbQueries");
 const path = require("path");
 const compression = require("compression");
-
 const spicedPg = require("spiced-pg");
-
-const { DATABASE_URL } = require("../secrets");
-
+const {DATABASE_URL} = require("../src/secrets.json");
 const db = spicedPg(DATABASE_URL);
 const DEFAULT_LIMIT = 20;
 
-function getImages() {
-  return db
-    .query(`SELECT * FROM images ORDER BY id DESC LIMIT $1`, [DEFAULT_LIMIT])
-    .then((results) => results.rows);
-}
+// function getImages() {
+//   return db
+//     .query(`SELECT * FROM images ORDER BY id DESC LIMIT $1`, [DEFAULT_LIMIT])
+//     .then((results) => results.rows);
+// }
+
 
 app.use(express.json());
 app.use(compression());
 app.use(express.json());
+
 
 app.use(
   express.urlencoded({
@@ -31,10 +30,8 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Projects
 app.get("/api/images", async (request, response) => {
-  console.log("dentro de server.js ruta /api/projects");
-  console.log("getImages", getImages);
-  console.log("DB URL", DATABASE_URL);
-  const projects = await getImages();
+  response.header("Access-Control-Allow-Origin", "*");
+  const projects = await dbQueries.getImages();
   if (!projects) {
     response.statusCode = 400;
     response.json({
