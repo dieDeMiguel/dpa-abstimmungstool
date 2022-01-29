@@ -1,0 +1,80 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+import Image from "../Image/Image";
+
+axios.defaults.baseURL = "http://localhost:8081";
+
+export interface Images {
+  download_url: string;
+  alt: string;
+  author: string;
+  width: string;
+  height: string;
+  id: string;
+}
+
+export default function Dashboard() {
+  const [images, setImages] = useState<Images[] | []>([]);
+  const [topImages, setTopImages] = useState<Images[] | []>([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/images",
+    }).then((response) => setImages(response.data));
+    axios({
+      method: "get",
+      url: "/api/images/top",
+    }).then((response) => setTopImages(response.data));
+  }, []);
+
+  return (
+    <main>
+      <div className="buttonBox flex header-holder center-relative relative pt-6">
+        {images?.length > 0 &&
+          images.map((image: Images) => {
+            const newWidth = parseInt(image.width, 10) / 10;
+            const newHeight = parseInt(image.height, 10) / 10;
+            return (
+              <Image
+                key={image.download_url}
+                url={image.download_url}
+                alt={image.author}
+                width={newWidth.toString()}
+                height={newHeight.toString()}
+                user="1"
+                author={image.author}
+                id={image.id}
+                isClickable
+              />
+            );
+          })}
+      </div>
+      <div className="buttonBox flex header-holder center-relative relative pt-6">
+        {topImages?.length > 0 ? (
+          topImages.map((image: Images) => {
+            const newWidth = parseInt(image.width, 10) / 10;
+            const newHeight = parseInt(image.height, 10) / 10;
+            return (
+              <Image
+                key={Math.random()}
+                url={image.download_url}
+                alt={image.author}
+                width={newWidth.toString()}
+                height={newHeight.toString()}
+                user="1"
+                author={image.author}
+                id={image.id}
+                isClickable={false}
+              />
+            );
+          })
+        ) : (
+          <p>false</p>
+        )}
+      </div>
+    </main>
+  );
+}

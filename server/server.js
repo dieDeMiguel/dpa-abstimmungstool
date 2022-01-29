@@ -4,21 +4,15 @@ const dbQueries = require("../src/dbQueries");
 const path = require("path");
 const compression = require("compression");
 const spicedPg = require("spiced-pg");
-const {DATABASE_URL} = require("../src/secrets.json");
+const { DATABASE_URL, PORT } = require("../src/secrets.json");
 const db = spicedPg(DATABASE_URL);
 const DEFAULT_LIMIT = 20;
 
-// function getImages() {
-//   return db
-//     .query(`SELECT * FROM images ORDER BY id DESC LIMIT $1`, [DEFAULT_LIMIT])
-//     .then((results) => results.rows);
-// }
-
+// response.header("Access-Control-Allow-Origin", "*");
 
 app.use(express.json());
 app.use(compression());
 app.use(express.json());
-
 
 app.use(
   express.urlencoded({
@@ -28,22 +22,78 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-// Projects
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", `*`);
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  next();
+});
+
+// Images
 app.get("/api/images", async (request, response) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  const projects = await dbQueries.getImages();
-  if (!projects) {
+  const images = await dbQueries.getImages();
+  if (!images) {
     response.statusCode = 400;
     response.json({
-      message: "Error while fetching projects",
+      message: "Error while fetching images",
     });
     return;
   }
-  response.json(projects);
+  response.json(images);
+});
+
+app.get("/api/images/top", async (request, response) => {
+  const topImagesIds = await dbQueries.getMostVotedImages(5);
+  if (!topImagesIds) {
+    response.statusCode = 400;
+    response.json({
+      message: "Error while fetching top images",
+    });
+    return;
+  }
+  const topImages = await Promise.all(
+    topImagesIds.map((topImageId) =>
+      dbQueries.getImageById(topImageId.image_id)
+    )
+  );
+  var mergedImages = [].concat.apply([], topImages);
+  response.json(mergedImages);
+});
+
+// Votes
+
+app.post("/api/vote", async (request, response) => {
+  dbQueries
+    .createVote(request.body)
+    .then((result) =>
+      response.json({ message: `Vote created with id: ${request.body.id}` })
+    )
+    .catch((error) => {
+      throw new Error(error);
+    });
+});
+
+app.delete("/api/vote/:image_id/:user_id", async (request, response) => {
+  const { user_id, image_id } = request.params;
+  dbQueries
+    .deleteVote({ user_id, image_id })
+    .then((result) => console.log("ressssss", result));
+  response.json({ message: `Vote Deleted with id: ${user_id}` });
 });
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 app.listen(process.env.PORT || 8081, function () {

@@ -1,14 +1,16 @@
 import React from "react";
 import "./App.css";
-import Dashboard from "./components/Dashboard";
+import { Global, ThemeProvider } from "@emotion/react";
+import Dashboard from "./components/Dashboard/Dashboard";
+import globalStyles from "./globalStyles/Global";
+import theme from "./globalStyles/theme";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Dashboard />
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
+      <Dashboard />
+    </ThemeProvider>
   );
 }
 

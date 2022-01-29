@@ -8,12 +8,6 @@ const db = spicedPg(
 
 const dataURL = "https://picsum.photos/v2/list?page=2&limit=100";
 
-// db.query('SELECT * FROM cities').then(function(results) {
-//     console.log(results.rows);
-// }).catch(function(err) {
-//     console.log(err);
-// });
-
 async function getData(url) {
   return fetch(url).then((result) => result.json());
 }
@@ -28,17 +22,10 @@ async function saveImage({ author, width, height, download_url }) {
 }
 
 (async function () {
-  console.log(
-    "DBBBBBB",
-    `postgres:postgres:postgres@localhost:5432/${DATABASE_URL}`
-  );
   const data = await getData(dataURL);
-  // console.log('data', data);
 
   const image = await saveImage(data[0]);
-  console.log('images', image);
-
-
+  
   await Promise.all(data.map(saveImage));
   console.log("done");
 })();

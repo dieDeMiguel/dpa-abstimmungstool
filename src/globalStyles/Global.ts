@@ -4,6 +4,17 @@ import theme from "./theme";
 /** Global styles */
 
 const globalStyles = css`
+  //Mobile, Tablet styles
+
+  .cards {
+    column-gap: ${theme.spacing.xs};
+    row-gap: ${theme.spacing.xs};
+  }
+
+  .buttonBox {
+    justify-content: center;
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -16,12 +27,7 @@ const globalStyles = css`
     background: transparent;
     cursor: pointer;
   }
-  hr {
-    height: 1px;
-    margin: 0 auto;
-    background-color: ${theme.colors.grey};
-    width: 100%;
-  }
+
   ul {
     padding: 0;
   }
@@ -71,68 +77,6 @@ const globalStyles = css`
   .mt-6 {
     margin-top: ${theme.spacing.l};
   }
-  .cards {
-    flex-wrap: wrap;
-    column-gap: ${theme.spacing.s};
-    row-gap: ${theme.spacing.s};
-    position: relative;
-  }
-  .nextButton,
-  .prevButton {
-    font-size: ${theme.fontSize.big};
-    font-weight: ${theme.fontWeight.bold};
-    text-transform: lowercase;
-  }
-  .nextButton {
-    background-color: ${theme.colors.light_red};
-    color: ${theme.colors.white};
-    padding: 1rem ${theme.spacing.m};
-
-    &:hover {
-      background-color: ${theme.colors.white};
-      color: ${theme.colors.light_red};
-      outline: ${theme.border.grey};
-      transition: ${theme.transition.color_hover};
-    }
-    &:disabled {
-      opacity: 60%;
-      pointer-events: none;
-    }
-  }
-  .footer {
-    margin: 0;
-  }
-
-  h2.header-font {
-    font-size: 4rem;
-    line-height: 5.5rem;
-    padding: 0;
-    margin: 0;
-    color: ${theme.colors.light_red};
-    text-align: center;
-
-    &:hover {
-      color: ${theme.colors.dark_red};
-      transition: ${theme.transition.color_hover};
-    }
-  }
-  h3.header-font {
-    font-size: 2rem;
-    line-height: 3.5rem;
-    padding: 0;
-    margin: 0 0 ${theme.spacing.l} 0;
-    text-align: center;
-
-    &:hover {
-      color: ${theme.colors.dark_red};
-      transition: ${theme.transition.color_hover};
-    }
-  }
-  .buttonBox {
-    column-gap: ${theme.spacing.s};
-    justify-content: flex-end;
-  }
-
   .flex {
     display: flex;
   }
@@ -154,35 +98,17 @@ const globalStyles = css`
   .align-items-center {
     align-items: center;
   }
-  .color-red {
-    color: ${theme.colors.light_red};
-  }
-  //Mobile, Tablet styles
 
-  @media only screen and (max-width: ${theme.tablet}) {
+  @media only screen and (min-width: ${theme.tablet}) {
     .cards {
-      column-gap: ${theme.spacing.xs};
-      row-gap: ${theme.spacing.xs};
-    }
-
-    h2,
-    h2.header-font {
-      font-size: ${theme.fontSize.h2_mobile};
-    }
-    h3,
-    h3.header-font {
-      font-size: ${theme.fontSize.h3_mobile};
-      line-height: 3rem;
-    }
-    h2.header-font {
-      margin: 0;
-    }
-    h3.header-font {
-      margin: ${theme.spacing.xs} 0 ${theme.spacing.m} 0;
-      line-height: 3rem;
+      flex-wrap: wrap;
+      column-gap: ${theme.spacing.s};
+      row-gap: ${theme.spacing.s};
+      position: relative;
     }
 
     .buttonBox {
+      column-gap: ${theme.spacing.s};
       justify-content: center;
     }
   }

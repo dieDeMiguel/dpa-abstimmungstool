@@ -2,8 +2,6 @@ const spicedPg = require("spiced-pg");
 
 const {DATABASE_URL} = require("./secrets.json");
 
-console.log("DB URL", DATABASE_URL);
-
 const db = spicedPg(DATABASE_URL);
 const DEFAULT_LIMIT = 5;
 
@@ -13,59 +11,38 @@ function getImages() {
     .then((results) => results.rows);
 }
 
-function createImage({ url, username, title, description }) {
+function getMostVotedImages(LIMIT) {
+  return db
+    .query(`SELECT votes.image_id, COUNT(votes.id) FROM votes GROUP BY votes.image_id LIMIT $1;`, [LIMIT])
+    .then((results) => results.rows);
+}
+
+function getImageById(image_id) {
+  return db
+    .query(`SELECT * FROM images WHERE id = $1`, [image_id])
+    .then((results) => results.rows);
+}
+
+function createVote({ user_id, image_id }) {
   return db
     .query(
-      `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) returning *`,
-      [url, username, title, description]
+      `INSERT INTO votes (user_id, image_id) VALUES ($1, $2) returning *`,
+      [user_id, image_id]
     )
     .then((result) => result.rows[0]);
 }
 
-// function getImageByID(id) {
-//   return db
-//     .query(
-//       `SELECT images.*,
-// (SELECT MAX(id) FROM images WHERE id < $1) AS prev, (SELECT MIN(id) FROM images WHERE id > $1) AS next FROM images WHERE id = $1;`,
-//       [id]
-//     )
-//     .then((result) => result.rows[0]);
-// }
-
-// function getCommentsByImageId(image_id) {
-//   return db
-//     .query(`SELECT * FROM comments WHERE image_id = $1`, [image_id])
-//     .then((results) => results.rows);
-// }
-
-// function addCommentToImage({ username, image_id, text }) {
-//   return db
-//     .query(
-//       `INSERT INTO comments (username, image_id, text) VALUES ($1, $2, $3) returning *`,
-//       [username, image_id, text]
-//     )
-//     .then((result) => result.rows[0]);
-// }
-
-// function deleteImageById(id) {
-//   return db
-//     .query("DELETE FROM images WHERE id = $1 RETURNING id", [id])
-//     .then((result) => result);
-// }
-
-// function deleteCommentByImageId(id) {
-//   return db
-//     .query("DELETE FROM comments WHERE image_id = $1 RETURNING id", [id])
-//     .then((result) => result);
-// }
+function deleteVote({ user_id, image_id }) {
+  console.log('dentro de DELETE VOTE', user_id, image_id);
+  return db
+    .query("DELETE FROM votes WHERE user_id = $1 AND image_id = $2 RETURNING id", [user_id, image_id])
+    .then((result) => result);
+}
 
 module.exports = {
   getImages,
-  createImage,
-  //   createImage,
-  //   getImageByID,
-  //   addCommentToImage,
-  //   getCommentsByImageId,
-  //   deleteCommentByImageId,
-  //   deleteImageById,
+  createVote,
+  deleteVote,
+  getMostVotedImages,
+  getImageById
 };
