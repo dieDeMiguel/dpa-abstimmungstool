@@ -87,9 +87,22 @@ app.post("/api/vote", async (request, response) => {
 app.delete("/api/vote/:image_id/:user_id", async (request, response) => {
   const { user_id, image_id } = request.params;
   dbQueries
-    .deleteVote({ user_id, image_id })
-    .then((result) => console.log("ressssss", result));
+    .deleteVote({ user_id, image_id });
   response.json({ message: `Vote Deleted with id: ${user_id}` });
+});
+
+// User
+
+app.get("/api/user/:username", async (request, response) => {
+  const { username } = request.params;
+  dbQueries
+    .getUserByUsername({ username })
+    .then((result) => response.json({ result }))
+    .catch((error) => console.log("failed to find user", error));
+});
+
+app.post("/api/user", async (request, response) => {
+  dbQueries.createUser(request.body).then((result) => response.json(result));
 });
 
 app.get("*", function (req, res) {

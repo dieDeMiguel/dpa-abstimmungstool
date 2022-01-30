@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
+import { useLocation } from "react-router";
 import Modal from "../Modal/Modal";
 import Image from "../Image/Image";
 import DashboardStyled from "./Dashboard.styled";
@@ -21,6 +23,12 @@ export default function Dashboard() {
   const [images, setImages] = useState<Images[] | []>([]);
   const [topImages, setTopImages] = useState<Images[] | []>([]);
   const [isModalopen, setisModalopen] = useState<boolean>(false);
+  const [activeUser, setActiveUser] = useState<any>();
+  const { state: user } = useLocation();
+
+  useEffect(() => {
+    setActiveUser(user);
+  }, [user]);
 
   useEffect(() => {
     axios({
@@ -81,7 +89,7 @@ export default function Dashboard() {
                       key={image.download_url}
                       url={image.download_url}
                       alt={image.author}
-                      user="1"
+                      user={activeUser.id}
                       author={image.author}
                       id={image.id}
                       isClickable
@@ -94,7 +102,7 @@ export default function Dashboard() {
                       key={image.download_url}
                       url={image.download_url}
                       alt={image.author}
-                      user="1"
+                      user={activeUser.id}
                       author={image.author}
                       id={image.id}
                       isClickable={false}
@@ -105,7 +113,7 @@ export default function Dashboard() {
         </>
 
         <div className="modalContainer">
-          {isModalopen && <Modal images={images} />}
+          {isModalopen && <Modal images={images} user={activeUser} />}
         </div>
         <div>
           <button type="button" onClick={toggleModal} className="btn">

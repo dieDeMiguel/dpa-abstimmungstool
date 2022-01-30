@@ -8,7 +8,7 @@ CREATE TABLE images (
 
 CREATE TABLE users (
     id SERIAL primary key,
-    username VARCHAR(255) NOT NULL
+    username VARCHAR(255) UNIQUE NOT NULL
 );
 
 

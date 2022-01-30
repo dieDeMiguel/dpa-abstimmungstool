@@ -1,6 +1,6 @@
 const spicedPg = require("spiced-pg");
 
-const {DATABASE_URL} = require("./secrets.json");
+const { DATABASE_URL } = require("./secrets.json");
 
 const db = spicedPg(DATABASE_URL);
 const DEFAULT_LIMIT = 20;
@@ -11,9 +11,24 @@ function getImages() {
     .then((results) => results.rows);
 }
 
+function getUserByUsername({ username }) {
+  return db
+    .query(`SELECT * FROM users WHERE username = $1`, [username])
+    .then((results) => results.rows);
+}
+
+function createUser({ username }) {
+  return db
+    .query(`INSERT INTO users (username) VALUES ($1) returning *`, [username])
+    .then((results) => results.rows);
+}
+
 function getMostVotedImages(LIMIT) {
   return db
-    .query(`SELECT votes.image_id, COUNT(votes.id) FROM votes GROUP BY votes.image_id LIMIT $1;`, [LIMIT])
+    .query(
+      `SELECT votes.image_id, COUNT(votes.id) FROM votes GROUP BY votes.image_id LIMIT $1;`,
+      [LIMIT]
+    )
     .then((results) => results.rows);
 }
 
@@ -33,9 +48,12 @@ function createVote({ user_id, image_id }) {
 }
 
 function deleteVote({ user_id, image_id }) {
-  console.log('dentro de DELETE VOTE', user_id, image_id);
+  console.log("dentro de DELETE VOTE", user_id, image_id);
   return db
-    .query("DELETE FROM votes WHERE user_id = $1 AND image_id = $2 RETURNING id", [user_id, image_id])
+    .query(
+      "DELETE FROM votes WHERE user_id = $1 AND image_id = $2 RETURNING id",
+      [user_id, image_id]
+    )
     .then((result) => result);
 }
 
@@ -44,5 +62,7 @@ module.exports = {
   createVote,
   deleteVote,
   getMostVotedImages,
-  getImageById
+  getImageById,
+  createUser,
+  getUserByUsername,
 };

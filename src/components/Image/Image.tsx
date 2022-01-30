@@ -5,7 +5,6 @@ import ImageStyled from "./Image.styled";
 export default function Image({
   url,
   alt,
-
   id,
   user,
   author,
@@ -13,15 +12,12 @@ export default function Image({
 }: {
   url: string;
   alt: string;
-
   id: string;
   user: string;
   author: string;
   isClickable: boolean;
 }) {
   const [isImageSelected, setIsImageSelected] = useState<boolean>(false);
-
-  useEffect(() => {}, [isImageSelected]);
 
   const handleChange = (imageId: string, userId: string) => {
     if (isImageSelected) {

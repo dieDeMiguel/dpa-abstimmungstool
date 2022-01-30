@@ -10,11 +10,16 @@ interface ImageInteface {
   id: string;
 }
 
+interface User {
+  username: string;
+  id: number;
+}
 interface ImagesProps {
   images: ImageInteface[];
+  user: User;
 }
 
-export default function Modal({ images }: ImagesProps) {
+export default function Modal({ images, user }: ImagesProps) {
   return (
     <ModalStyled>
       <HorizontalScroll className="horizontalScrollComponent">
@@ -25,7 +30,7 @@ export default function Modal({ images }: ImagesProps) {
                 key={image.download_url}
                 url={image.download_url}
                 alt={image.author}
-                user="1"
+                user={user.id.toString()}
                 author={image.author}
                 id={image.id}
                 isClickable
