@@ -12,7 +12,7 @@ interface ImageInteface {
 
 interface User {
   username: string;
-  id: number;
+  id: string;
 }
 interface ImagesProps {
   images: ImageInteface[];
@@ -30,7 +30,7 @@ export default function Modal({ images, user }: ImagesProps) {
                 key={image.download_url}
                 url={image.download_url}
                 alt={image.author}
-                user={user.id.toString()}
+                user={user.id}
                 author={image.author}
                 id={image.id}
                 isClickable

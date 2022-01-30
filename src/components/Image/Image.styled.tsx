@@ -61,6 +61,7 @@ const CardStyled = styled.div`
     input[type="radio"] {
       display: none;
     }
+
     input[type="checkbox"]:checked ~ .check-card-body .check-card-check-icon,
     input[type="radio"]:checked ~ .check-card-body .check-card-check-icon {
       bottom: 15%;
@@ -107,6 +108,12 @@ const CardStyled = styled.div`
     align-items: center;
 
     .check-card-item {
+      input[type="checkbox"],
+      input[type="radio"] {
+        display: block;
+        width: 100%;
+        height: 20px;
+      }
       &:hover {
         -webkit-transform: scale(1.2);
         -moz-transform: scale(1.2);
