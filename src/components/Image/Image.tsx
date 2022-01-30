@@ -5,8 +5,7 @@ import ImageStyled from "./Image.styled";
 export default function Image({
   url,
   alt,
-  width,
-  height,
+
   id,
   user,
   author,
@@ -14,8 +13,7 @@ export default function Image({
 }: {
   url: string;
   alt: string;
-  width: string;
-  height: string;
+
   id: string;
   user: string;
   author: string;
@@ -56,62 +54,60 @@ export default function Image({
     }
   };
   return (
-    <ImageStyled>
-      <div className="card ">
-        <ul className="check-card">
-          <li className="check-card-item">
-            {isClickable ? (
-              <label htmlFor={id}>
-                <input
-                  type="checkbox"
-                  key={id}
-                  id={id}
-                  name={user}
-                  onChange={() => handleChange(id, user)}
-                  checked={isImageSelected}
-                />
+    <ImageStyled className="imageStyled">
+      <div className="check-card">
+        <div className="check-card-item">
+          {isClickable ? (
+            <label htmlFor={id}>
+              <input
+                type="checkbox"
+                key={id}
+                id={id}
+                name={user}
+                onChange={() => handleChange(id, user)}
+                checked={isImageSelected}
+              />
 
-                <div className="check-card-body flex align-items-center justify-content-center ">
-                  <div className="card-icon flex align-items-center">
-                    <img src={url} alt={alt} width={width} height={height} />
-                  </div>
+              <div className="check-card-body flex align-items-center justify-content-center ">
+                <div className="card-icon flex align-items-center">
+                  <img src={url} alt={alt} />
+                </div>
 
-                  <div className="check-card-check-icon">
-                    <img
-                      src="images/icons/check.svg"
-                      alt="Checked Icon"
-                      width="75"
-                      height="75"
-                    />{" "}
-                  </div>
-                </div>
-                <div className="flex justify-content-center align-items-center">
-                  <h3 className="check-card-title">Author: {author}</h3>
-                </div>
-              </label>
-            ) : (
-              <div className="topImageWrapper">
-                <div className="check-card-body flex align-items-center justify-content-center ">
-                  <div className="card-icon flex align-items-center">
-                    <img src={url} alt={alt} width={width} height={height} />
-                  </div>
-
-                  <div className="check-card-check-icon">
-                    <img
-                      src="images/icons/check.svg"
-                      alt="Checked Icon"
-                      width="75"
-                      height="75"
-                    />{" "}
-                  </div>
-                </div>
-                <div className="flex justify-content-center align-items-center">
-                  <h3 className="check-card-title">Author: {author}</h3>
+                <div className="check-card-check-icon">
+                  <img
+                    src="images/icons/check.svg"
+                    alt="Checked Icon"
+                    width="75"
+                    height="75"
+                  />{" "}
                 </div>
               </div>
-            )}
-          </li>
-        </ul>
+              <div className="flex justify-content-center align-items-center">
+                <h4 className="check-card-title">Author: {author}</h4>
+              </div>
+            </label>
+          ) : (
+            <div className="topImageWrapper">
+              <div className="check-card-body flex align-items-center justify-content-center ">
+                <div className="card-icon flex align-items-center">
+                  <img src={url} alt={alt} />
+                </div>
+
+                <div className="check-card-check-icon">
+                  <img
+                    src="images/icons/check.svg"
+                    alt="Checked Icon"
+                    width="75"
+                    height="75"
+                  />{" "}
+                </div>
+              </div>
+              <div className="flex justify-content-center align-items-center">
+                <h4 className="check-card-title">Author: {author}</h4>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </ImageStyled>
   );

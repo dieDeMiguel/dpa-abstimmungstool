@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import Image from "../Image/Image";
+import DashboardStyled from "./Dashboard.styled";
 
 const { PORT } = require("../../secrets.json");
 
@@ -12,15 +14,13 @@ interface Images {
   download_url: string;
   alt: string;
   author: string;
-  width: string;
-  height: string;
   id: string;
 }
 
 export default function Dashboard() {
   const [images, setImages] = useState<Images[] | []>([]);
   const [topImages, setTopImages] = useState<Images[] | []>([]);
-  const [open, setOpen] = useState<boolean>(false);
+  const [isModalopen, setisModalopen] = useState<boolean>(false);
 
   useEffect(() => {
     axios({
@@ -34,60 +34,86 @@ export default function Dashboard() {
   }, []);
 
   const toggleModal = () => {
-    setOpen(!open);
+    if (isModalopen === true) {
+      axios({
+        method: "get",
+        url: "/api/images/top",
+      }).then((response) => setTopImages(response.data));
+    }
+    setisModalopen(!isModalopen);
   };
 
   return (
-    <main>
-      <div className="buttonBox flex header-holder center-relative relative pt-6">
-        {images?.length > 0 &&
-          images.map((image: Images) => {
-            const newWidth = parseInt(image.width, 10) / 10;
-            const newHeight = parseInt(image.height, 10) / 10;
-            return (
-              <Image
-                key={image.download_url}
-                url={image.download_url}
-                alt={image.author}
-                width={newWidth.toString()}
-                height={newHeight.toString()}
-                user="1"
-                author={image.author}
-                id={image.id}
-                isClickable
-              />
-            );
-          })}
-      </div>
-      <div>
-        <button type="button" onClick={toggleModal}>
-          Toggle modal
-        </button>
-        <Modal images={images} />
-      </div>
-      <div className="buttonBox flex header-holder center-relative relative pt-6">
-        {topImages?.length > 0 ? (
-          topImages.map((image: Images) => {
-            const newWidth = parseInt(image.width, 10) / 10;
-            const newHeight = parseInt(image.height, 10) / 10;
-            return (
-              <Image
-                key={Math.random()}
-                url={image.download_url}
-                alt={image.author}
-                width={newWidth.toString()}
-                height={newHeight.toString()}
-                user="1"
-                author={image.author}
-                id={image.id}
-                isClickable={false}
-              />
-            );
-          })
-        ) : (
-          <p>No Top Images Yet</p>
+    <div className="mainWrapper">
+      <DashboardStyled
+        className={clsx(
+          "flex align-items-center justify-content-center",
+          isModalopen && "changeBackground"
         )}
-      </div>
-    </main>
+      >
+        <div className="heading">
+          <h1>DPA Abstimmungs Tool</h1>
+        </div>
+
+        {!isModalopen ? (
+          <>
+            <h3 className="topPhotosHeading">Fotos mit den meisten Stimmen</h3>
+            <div className="cardWrapper flex">
+              {topImages?.length > 0 ? (
+                topImages.map((image: Images) => {
+                  return (
+                    <Image
+                      key={image.download_url}
+                      url={image.download_url}
+                      alt={image.author}
+                      user="1"
+                      author={image.author}
+                      id={image.id}
+                      isClickable={false}
+                    />
+                  );
+                })
+              ) : (
+                <p>Es gibt noch keine Top Fotos</p>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="cardWrapper flex hiddenTabletUp">
+            <h3 className="topPhotosHeading">
+              Hier könnt ihr über die Fotos abstimmen
+            </h3>
+            {topImages?.length > 0 ? (
+              topImages.map((image: Images) => {
+                return (
+                  <Image
+                    key={image.download_url}
+                    url={image.download_url}
+                    alt={image.author}
+                    user="1"
+                    author={image.author}
+                    id={image.id}
+                    isClickable
+                  />
+                );
+              })
+            ) : (
+              <p>Es gibt noch keine Top Fotos</p>
+            )}
+          </div>
+        )}
+
+        <div className="modalContainer">
+          {isModalopen && <Modal images={images} />}
+        </div>
+        <div>
+          <button type="button" onClick={toggleModal} className="btn">
+            {isModalopen
+              ? "Abstimmungstool schließen"
+              : "Abstimmungstool öffnen"}
+          </button>
+        </div>
+      </DashboardStyled>
+    </div>
   );
 }

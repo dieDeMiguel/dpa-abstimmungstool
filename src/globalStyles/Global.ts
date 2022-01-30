@@ -5,18 +5,20 @@ import theme from "./theme";
 
 const globalStyles = css`
   //Mobile, Tablet styles
-
   .cards {
     column-gap: ${theme.spacing.xs};
     row-gap: ${theme.spacing.xs};
   }
 
-  .buttonBox {
-    justify-content: center;
+  .cardWrapper {
+    flex-direction: column;
+    align-items: center;
   }
 
   * {
     box-sizing: border-box;
+    padding: 0;
+    border: 0;
   }
 
   body {
@@ -35,6 +37,7 @@ const globalStyles = css`
   h3 {
     margin: 0;
   }
+
   .py-2 {
     padding: ${theme.spacing.s} 0;
   }
@@ -100,6 +103,13 @@ const globalStyles = css`
   }
 
   @media only screen and (min-width: ${theme.tablet}) {
+    .mainWrapper {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .cards {
       flex-wrap: wrap;
       column-gap: ${theme.spacing.s};
@@ -110,6 +120,14 @@ const globalStyles = css`
     .buttonBox {
       column-gap: ${theme.spacing.s};
       justify-content: center;
+    }
+
+    .cardWrapper {
+      flex-direction: row;
+    }
+
+    .hiddenTabletUp {
+      display: none;
     }
   }
 `;
