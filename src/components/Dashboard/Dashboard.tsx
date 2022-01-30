@@ -55,12 +55,33 @@ export default function Dashboard() {
           <h1>DPA Abstimmungs Tool</h1>
         </div>
 
-        {!isModalopen ? (
-          <>
-            <h3 className="topPhotosHeading">Fotos mit den meisten Stimmen</h3>
-            <div className="cardWrapper flex">
-              {topImages?.length > 0 ? (
-                topImages.map((image: Images) => {
+        <>
+          <h3 className="topPhotosHeading">
+            {isModalopen
+              ? " Hier könnt ihr über die Fotos abstimmen"
+              : "Fotos mit den meisten Stimmen"}
+          </h3>
+          <div
+            className={clsx(
+              "cardWrapper flex",
+              isModalopen && "hiddenTabletUp"
+            )}
+          >
+            {isModalopen && topImages?.length > 0
+              ? topImages.map((image: Images) => {
+                  return (
+                    <Image
+                      key={image.download_url}
+                      url={image.download_url}
+                      alt={image.author}
+                      user="1"
+                      author={image.author}
+                      id={image.id}
+                      isClickable
+                    />
+                  );
+                })
+              : topImages.map((image: Images) => {
                   return (
                     <Image
                       key={image.download_url}
@@ -72,36 +93,9 @@ export default function Dashboard() {
                       isClickable={false}
                     />
                   );
-                })
-              ) : (
-                <p>Es gibt noch keine Top Fotos</p>
-              )}
-            </div>
-          </>
-        ) : (
-          <div className="cardWrapper flex hiddenTabletUp">
-            <h3 className="topPhotosHeading">
-              Hier könnt ihr über die Fotos abstimmen
-            </h3>
-            {topImages?.length > 0 ? (
-              topImages.map((image: Images) => {
-                return (
-                  <Image
-                    key={image.download_url}
-                    url={image.download_url}
-                    alt={image.author}
-                    user="1"
-                    author={image.author}
-                    id={image.id}
-                    isClickable
-                  />
-                );
-              })
-            ) : (
-              <p>Es gibt noch keine Top Fotos</p>
-            )}
+                })}
           </div>
-        )}
+        </>
 
         <div className="modalContainer">
           {isModalopen && <Modal images={images} />}

@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 const ModalStyled = styled.div`
   height: 60vh;
   width: 100vw;
+  background-color: rgb(223, 143, 97);
 
   .horizontalScrollComponent {
     display: none;

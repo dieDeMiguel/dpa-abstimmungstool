@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 /** Card styles */
 
 const CardStyled = styled.div`
+  padding: 1rem;
   .check-card {
     width: 100%;
     margin: 1rem;
@@ -14,6 +15,7 @@ const CardStyled = styled.div`
       overflow: hidden;
       height: 320px;
       width: 200px;
+      background: ${({ theme }) => theme.colors.white};
 
       box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.07),
         0px 5.7776px 8.4221px rgba(0, 0, 0, 0.0503198),

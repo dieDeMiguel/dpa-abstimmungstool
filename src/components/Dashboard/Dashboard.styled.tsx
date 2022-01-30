@@ -8,6 +8,7 @@ const DashboardStyled = styled.main`
   height: 100%;
   width: 100vw;
   padding: 2rem;
+  background: #d39247;
 
   &.changeBackground {
     background-color: #f3d657;
