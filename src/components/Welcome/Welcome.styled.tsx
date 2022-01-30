@@ -24,12 +24,40 @@ const WelcomeStyled = styled.main`
     border-radius: 5px;
   }
 
-  .modalWrapper {
+  .welcomeWrapper {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .welcomeForm {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 350px;
+
+      h2 {
+        text-align: center;
+      }
+
+      input[type="text"] {
+        font-family: "Roboto", sans-serif;
+        color: #333;
+        font-size: 1.2rem;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        border-radius: 0.2rem;
+        background-color: rgb(255, 255, 255);
+        border: none;
+        width: 90%;
+        display: block;
+        border-bottom: 0.3rem solid transparent;
+        transition: all 0.3s;
+        width: 250px;
+      }
+    }
   }
 
   @media only screen and (min-width: ${({ theme }) => theme.tablet}) {

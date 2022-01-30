@@ -40,18 +40,19 @@ export default function Welcome() {
   };
   return (
     <WelcomeStyled>
-      <div className="modalWrapper">
-        <form onSubmit={handleSubmit}>
-          <h2>Willkommen beim DPA-Abstimmungstool</h2>
-          <h2>
-            Geben Sie Ihre Mitarbeiter-E-Mail ein, wir erinnern Sie daran, dass
-            Sie nur einmal abstimmen können.
-          </h2>
+      <div className="welcomeWrapper">
+        <form onSubmit={handleSubmit} className="welcomeForm">
+          <h1>Willkommen beim DPA-Abstimmungstool</h1>
+          <p>
+            Tragen Sie bitten Ihre Mitarbeiter-E-Mail ein, wir erinnern Sie
+            daran, dass Sie nur einmal abstimmen können.
+          </p>
           <input
             type="text"
-            className="text"
+            className="inputText"
             onChange={(event) => handleChange(event)}
           />
+          {errorMessage && <p>{errorMessage}</p>}
           <button className="btn" type="submit">
             Anmelden
           </button>
