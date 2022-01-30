@@ -86,6 +86,11 @@ const CardStyled = styled.div`
     .check-card div .topImageWrapper {
       height: 12rem;
     }
+
+    .card-icon {
+      max-width: 160px;
+    }
+
     .card-icon img {
       width: 100%;
       height: 100%;

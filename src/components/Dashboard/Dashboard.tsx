@@ -56,10 +56,17 @@ export default function Dashboard() {
         </div>
 
         <>
+          {topImages?.length !== 0 && (
+            <h3 className="topPhotosHeading">
+              {isModalopen
+                ? " Hier könnt ihr über die Fotos abstimmen"
+                : "Fotos mit den meisten Stimmen"}
+            </h3>
+          )}
           <h3 className="topPhotosHeading">
-            {isModalopen
-              ? " Hier könnt ihr über die Fotos abstimmen"
-              : "Fotos mit den meisten Stimmen"}
+            {topImages?.length === 0 &&
+              !isModalopen &&
+              "Es gibt noch keine ausgewählten Fotos"}
           </h3>
           <div
             className={clsx(
@@ -68,7 +75,7 @@ export default function Dashboard() {
             )}
           >
             {isModalopen && topImages?.length > 0
-              ? topImages.map((image: Images) => {
+              ? images.map((image: Images) => {
                   return (
                     <Image
                       key={image.download_url}
