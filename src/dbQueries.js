@@ -3,7 +3,7 @@ const spicedPg = require("spiced-pg");
 const {DATABASE_URL} = require("./secrets.json");
 
 const db = spicedPg(DATABASE_URL);
-const DEFAULT_LIMIT = 5;
+const DEFAULT_LIMIT = 20;
 
 function getImages() {
   return db

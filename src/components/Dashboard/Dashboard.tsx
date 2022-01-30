@@ -4,7 +4,9 @@ import axios from "axios";
 
 import Image from "../Image/Image";
 
-axios.defaults.baseURL = "http://localhost:8081";
+const { PORT } = require("../../secrets.json");
+
+axios.defaults.baseURL = `http://localhost:${PORT}`;
 
 export interface Images {
   download_url: string;
@@ -72,7 +74,7 @@ export default function Dashboard() {
             );
           })
         ) : (
-          <p>false</p>
+          <p>No Top Images Yet</p>
         )}
       </div>
     </main>
