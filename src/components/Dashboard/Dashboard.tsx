@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import Modal from "../Modal/Modal";
 import Image from "../Image/Image";
 
 const { PORT } = require("../../secrets.json");
 
 axios.defaults.baseURL = `http://localhost:${PORT}`;
 
-export interface Images {
+interface Images {
   download_url: string;
   alt: string;
   author: string;
@@ -20,6 +20,7 @@ export interface Images {
 export default function Dashboard() {
   const [images, setImages] = useState<Images[] | []>([]);
   const [topImages, setTopImages] = useState<Images[] | []>([]);
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     axios({
@@ -31,6 +32,10 @@ export default function Dashboard() {
       url: "/api/images/top",
     }).then((response) => setTopImages(response.data));
   }, []);
+
+  const toggleModal = () => {
+    setOpen(!open);
+  };
 
   return (
     <main>
@@ -53,6 +58,12 @@ export default function Dashboard() {
               />
             );
           })}
+      </div>
+      <div>
+        <button type="button" onClick={toggleModal}>
+          Toggle modal
+        </button>
+        <Modal images={images} />
       </div>
       <div className="buttonBox flex header-holder center-relative relative pt-6">
         {topImages?.length > 0 ? (

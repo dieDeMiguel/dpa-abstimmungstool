@@ -56,7 +56,7 @@ export default function Image({
     }
   };
   return (
-    <ImageStyled className="card-box">
+    <ImageStyled>
       <div className="card ">
         <ul className="check-card">
           <li className="check-card-item">
