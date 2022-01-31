@@ -29,7 +29,6 @@ export default function Modal({ images, user }: ImagesProps) {
               <Image
                 key={image.download_url}
                 url={image.download_url}
-                alt={image.author}
                 user={user.id}
                 author={image.author}
                 id={image.id}

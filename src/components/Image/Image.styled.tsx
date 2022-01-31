@@ -12,7 +12,7 @@ const CardStyled = styled.div`
       border-radius: 5px;
       padding: 1rem 1rem 1.5rem 1rem;
       overflow: hidden;
-      height: 20rem;
+      height: 21rem;
       width: 14rem;
       background: ${({ theme }) => theme.colors.white};
 
@@ -22,6 +22,19 @@ const CardStyled = styled.div`
         0px 3.5216px 2.0172px rgba(0, 0, 0, 0.035),
         0px 1.6501px 2.32008px rgba(0, 0, 0, 0.0282725),
         0px 1.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+    }
+
+    .btnCard {
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    .cardWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      margin-top: 1.2rem;
     }
 
     .cameraIconWrapper {
@@ -47,6 +60,7 @@ const CardStyled = styled.div`
       flex-direction: column;
       align-content: space-between;
       row-gap: 1.5rem;
+      margin-top: 1.2rem;
     }
 
     .check-card-body {
@@ -107,16 +121,11 @@ const CardStyled = styled.div`
     }
 
     .card-icon {
-      width: 170px;
-      height: 170px;
+      width: 100%;
+      height: 210px;
       background-repeat: no-repeat;
       background-size: 100% auto;
       background-size: cover;
-    }
-
-    .card-icon img {
-      width: 100%;
-      height: 100%;
     }
 
     .check-card-check-icon img {

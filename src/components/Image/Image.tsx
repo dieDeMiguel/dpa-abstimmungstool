@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import ImageStyled from "./Image.styled";
+import ImageContentComponent from "../ImageContentComponent/ImageContentComponent";
 
 export default function Image({
   url,
-  alt,
   id,
   user,
   author,
   isClickable = true,
 }: {
   url: string;
-  alt: string;
   id: string;
   user: string;
   author: string;
@@ -55,7 +54,7 @@ export default function Image({
       <div className="check-card flex justify-content-center">
         <div className={clsx("check-card-item", isClickable && "hoverEffect")}>
           {isClickable ? (
-            <label htmlFor={id}>
+            <label htmlFor={id} className="cardWrapper">
               <input
                 type="checkbox"
                 key={id}
@@ -65,60 +64,15 @@ export default function Image({
                 checked={isImageSelected}
               />
 
-              <div className="check-card-body flex align-items-center justify-content-center ">
-                <div
-                  className="card-icon flex align-items-center"
-                  style={{ backgroundImage: `url(${url})` }}
-                />
-
-                <div className="check-card-check-icon">
-                  <img
-                    src="images/icons/check.svg"
-                    alt="Checked Icon"
-                    width="75"
-                    height="75"
-                  />{" "}
-                </div>
-              </div>
-              <div className="flex justify-content-center align-items-center column">
-                <div className="cameraIconWrapper">
-                  <img
-                    className="cameraIcon"
-                    src="/images/icons/camera.svg"
-                    alt="CameraIcon"
-                  />
-                  <h4 className="check-card-title">{author}</h4>
-                </div>
-
-                <h4 className="check-card-title">Click To Vote</h4>
-              </div>
+              <ImageContentComponent url={url} author={author} isVotable />
             </label>
           ) : (
             <div className="topImageWrapper">
-              <div className="check-card-body flex align-items-center justify-content-center ">
-                <div className="card-icon flex align-items-center">
-                  <img src={url} alt={alt} />
-                </div>
-
-                <div className="check-card-check-icon">
-                  <img
-                    src="images/icons/check.svg"
-                    alt="Checked Icon"
-                    width="75"
-                    height="75"
-                  />{" "}
-                </div>
-              </div>
-              <div className="flex justify-content-center align-items-center">
-                <div className="cameraIconWrapper">
-                  <img
-                    className="cameraIcon"
-                    src="/images/icons/camera.svg"
-                    alt="CameraIcon"
-                  />
-                  <h4 className="check-card-title">{author}</h4>
-                </div>
-              </div>
+              <ImageContentComponent
+                url={url}
+                author={author}
+                isVotable={false}
+              />
             </div>
           )}
         </div>

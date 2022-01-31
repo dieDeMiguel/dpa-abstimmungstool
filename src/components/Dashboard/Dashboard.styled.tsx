@@ -9,7 +9,7 @@ const DashboardStyled = styled.div`
   width: 100%;
   padding: 0;
   background: #d39247;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 4rem;
 
   &.changeBackground {
     background-color: #f3d657;
@@ -26,6 +26,7 @@ const DashboardStyled = styled.div`
 
     h1 {
       font-size: 2rem;
+      text-align: center;
     }
   }
 
@@ -41,22 +42,6 @@ const DashboardStyled = styled.div`
 
   .modalContainer {
     display: none;
-  }
-
-  .btn {
-    margin: 3rem 2rem;
-    color: white;
-    font-weight: bold;
-    width: 150px;
-    height: 50px;
-    transition: 0.2s linear;
-    outline: none;
-    cursor: pointer;
-    font-size: 15px;
-    padding: 5px;
-    border: 2px solid transparent;
-    background-color: rgb(161, 211, 255);
-    border-radius: 5px;
   }
 
   @media only screen and (min-width: ${({ theme }) => theme.tablet}) {

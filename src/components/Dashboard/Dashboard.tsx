@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 import Modal from "../Modal/Modal";
 import Image from "../Image/Image";
 import DashboardStyled from "./Dashboard.styled";
+import ImageContainer from "../ImageContainer/ImageContainer";
 
 const { PORT } = require("../../secrets.json");
 
@@ -85,33 +86,19 @@ export default function Dashboard() {
               "Es gibt noch keine ausgewählten Fotos"}
           </h3>
           <div className={clsx("cardWrapper", isModalopen && "hiddenTabletUp")}>
-            {isModalopen && topImages?.length > 0
-              ? images.map((image: Images) => {
-                  return (
-                    <Image
-                      key={image.download_url}
-                      url={image.download_url}
-                      alt={image.author}
-                      user={activeUser.id}
-                      author={image.author}
-                      id={image.id}
-                      isClickable
-                    />
-                  );
-                })
-              : topImages.map((image: Images) => {
-                  return (
-                    <Image
-                      key={image.download_url}
-                      url={image.download_url}
-                      alt={image.author}
-                      user={activeUser.id}
-                      author={image.author}
-                      id={image.id}
-                      isClickable={false}
-                    />
-                  );
-                })}
+            {isModalopen ? (
+              <ImageContainer
+                images={topImages}
+                user={activeUser}
+                isClickable
+              />
+            ) : (
+              <ImageContainer
+                images={topImages}
+                user={activeUser}
+                isClickable={false}
+              />
+            )}
           </div>
         </section>
 

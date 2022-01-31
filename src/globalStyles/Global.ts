@@ -72,6 +72,22 @@ const globalStyles = css`
     align-items: center;
   }
 
+  .btn {
+    margin: 3rem 2rem;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+    height: 50px;
+    transition: 0.2s linear;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 5px;
+    border: 2px solid transparent;
+    background-color: rgb(161, 211, 255);
+    border-radius: 5px;
+  }
+
   @media only screen and (min-width: ${theme.tablet}) {
     .container {
       display: flex;
