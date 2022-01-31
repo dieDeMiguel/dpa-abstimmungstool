@@ -4,6 +4,11 @@ import theme from "./theme";
 /** Global styles */
 
 const globalStyles = css`
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+
   //Mobile, Tablet styles
   .cards {
     column-gap: ${theme.spacing.xs};
@@ -68,11 +73,12 @@ const globalStyles = css`
   }
 
   @media only screen and (min-width: ${theme.tablet}) {
-    .mainWrapper {
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .cards {
       flex-wrap: wrap;
       column-gap: ${theme.spacing.s};

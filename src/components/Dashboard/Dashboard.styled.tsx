@@ -2,16 +2,21 @@ import styled from "@emotion/styled";
 
 /** Card styles */
 
-const DashboardStyled = styled.main`
+const DashboardStyled = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   padding: 0;
   background: #d39247;
+  padding: 1.5rem;
 
   &.changeBackground {
     background-color: #f3d657;
+  }
+
+  .topPhotosWrapper {
+    text-align: center;
   }
 
   .heading {
@@ -56,7 +61,8 @@ const DashboardStyled = styled.main`
 
   @media only screen and (min-width: ${({ theme }) => theme.tablet}) {
     .heading {
-      margin-bottom: 2rem;
+      margin-top: 3rem;
+
       h1 {
         font-size: 4rem;
       }

@@ -52,7 +52,7 @@ export default function Image({
   };
   return (
     <ImageStyled className="imageStyled">
-      <div className="check-card">
+      <div className="check-card flex justify-content-center">
         <div className={clsx("check-card-item", isClickable && "hoverEffect")}>
           {isClickable ? (
             <label htmlFor={id}>
@@ -80,8 +80,17 @@ export default function Image({
                   />{" "}
                 </div>
               </div>
-              <div className="flex justify-content-center align-items-center">
-                <h4 className="check-card-title">Author: {author}</h4>
+              <div className="flex justify-content-center align-items-center column">
+                <div className="cameraIconWrapper">
+                  <img
+                    className="cameraIcon"
+                    src="/images/icons/camera.svg"
+                    alt="CameraIcon"
+                  />
+                  <h4 className="check-card-title">{author}</h4>
+                </div>
+
+                <h4 className="check-card-title">Click To Vote</h4>
               </div>
             </label>
           ) : (
@@ -101,7 +110,14 @@ export default function Image({
                 </div>
               </div>
               <div className="flex justify-content-center align-items-center">
-                <h4 className="check-card-title">Author: {author}</h4>
+                <div className="cameraIconWrapper">
+                  <img
+                    className="cameraIcon"
+                    src="/images/icons/camera.svg"
+                    alt="CameraIcon"
+                  />
+                  <h4 className="check-card-title">{author}</h4>
+                </div>
               </div>
             </div>
           )}

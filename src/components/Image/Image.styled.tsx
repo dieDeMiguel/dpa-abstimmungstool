@@ -6,15 +6,14 @@ const CardStyled = styled.div`
   padding: 1rem;
   .check-card {
     width: 100%;
-    margin: 1rem;
 
     .check-card-item {
       padding: 2rem;
       border-radius: 5px;
-      padding: 1rem;
+      padding: 1rem 1rem 1.5rem 1rem;
       overflow: hidden;
-      height: 18rem;
-      width: 13rem;
+      height: 20rem;
+      width: 14rem;
       background: ${({ theme }) => theme.colors.white};
 
       box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.07),
@@ -23,6 +22,22 @@ const CardStyled = styled.div`
         0px 3.5216px 2.0172px rgba(0, 0, 0, 0.035),
         0px 1.6501px 2.32008px rgba(0, 0, 0, 0.0282725),
         0px 1.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+    }
+
+    .cameraIconWrapper {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      .cameraIcon {
+        width: 35px;
+        height: 35px;
+        margin: 0.8rem 0.2rem 0 0;
+      }
+
+      .check-card-title {
+        margin-top: 1.2rem;
+      }
     }
 
     .topImageWrapper {
@@ -42,9 +57,10 @@ const CardStyled = styled.div`
     }
 
     .check-card-title {
-      font-size: ${({ theme }) => theme.fontSize.medium};
+      font-size: ${({ theme }) => theme.fontSize.small};
       text-align: center;
       margin: 1rem 0 0;
+      color: #f18973;
     }
 
     .check-card-check-icon {
@@ -80,6 +96,7 @@ const CardStyled = styled.div`
       padding: 0;
       margin: 0;
     }
+
     .check-card-title {
       line-height: 1.5rem;
     }
