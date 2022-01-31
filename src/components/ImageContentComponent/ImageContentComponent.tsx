@@ -1,14 +1,23 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export default function ImageContentComponent({
   url,
   author,
   isVotable,
+  setIsPhotoComponentOpen,
+  setBigPhotoURL,
 }: {
   url: string;
   author: string;
   isVotable: boolean;
+  setIsPhotoComponentOpen: Dispatch<SetStateAction<boolean>>;
+  setBigPhotoURL: Dispatch<SetStateAction<string>>;
 }) {
+  const handleClick = () => {
+    setBigPhotoURL(url);
+    setIsPhotoComponentOpen(true);
+  };
+
   return (
     <>
       <div className="check-card-body flex align-items-center justify-content-center ">
@@ -37,8 +46,8 @@ export default function ImageContentComponent({
         </div>
 
         {isVotable && (
-          <button className="btn btnCard" type="button">
-            Click To Vote
+          <button className="btn btnCard" type="button" onClick={handleClick}>
+            Foto ansehen
           </button>
         )}
       </div>

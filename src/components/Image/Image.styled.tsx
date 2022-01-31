@@ -12,9 +12,13 @@ const CardStyled = styled.div`
       border-radius: 5px;
       padding: 1rem 1rem 1.5rem 1rem;
       overflow: hidden;
-      height: 21rem;
+      height: 23rem;
       width: 14rem;
       background: ${({ theme }) => theme.colors.white};
+
+      &.noButton {
+        height: 20rem;
+      }
 
       box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.07),
         0px 5.7776px 8.4221px rgba(0, 0, 0, 0.0503198),
@@ -34,7 +38,7 @@ const CardStyled = styled.div`
       justify-content: center;
       height: 100%;
       width: 100%;
-      margin-top: 1.2rem;
+      margin-top: 0.6rem;
     }
 
     .cameraIconWrapper {

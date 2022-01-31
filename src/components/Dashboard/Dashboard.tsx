@@ -5,9 +5,11 @@ import axios from "axios";
 import clsx from "clsx";
 import { useLocation } from "react-router";
 import Modal from "../Modal/Modal";
-import Image from "../Image/Image";
 import DashboardStyled from "./Dashboard.styled";
 import ImageContainer from "../ImageContainer/ImageContainer";
+import HeadingComponent from "../HeadingComponent./HeadingComponent";
+import { textContent } from "../../ContentFile";
+import PhotoComponent from "../PhotoComponent/PhotoComponent";
 
 const { PORT } = require("../../secrets.json");
 
@@ -26,6 +28,9 @@ export default function Dashboard() {
   const [isModalopen, setisModalopen] = useState<boolean>(false);
   const [activeUser, setActiveUser] = useState<any>();
   const { state: user } = useLocation();
+  const [isPhotoComponentOpen, setIsPhotoComponentOpen] =
+    useState<boolean>(false);
+  const [bigPhotoURL, setBigPhotoURL] = useState<string>("");
 
   useEffect(() => {
     setActiveUser(user);
@@ -73,38 +78,55 @@ export default function Dashboard() {
         </div>
 
         <section className="topPhotosWrapper">
-          {topImages?.length !== 0 && (
-            <h3 className="topPhotosHeading">
-              {isModalopen
-                ? " Hier könnt ihr über die Fotos abstimmen"
-                : "Fotos mit den meisten Stimmen"}
-            </h3>
+          {isPhotoComponentOpen && (
+            <PhotoComponent
+              url={bigPhotoURL}
+              setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+            />
           )}
-          <h3 className="topPhotosHeading">
-            {topImages?.length === 0 &&
-              !isModalopen &&
-              "Es gibt noch keine ausgewählten Fotos"}
-          </h3>
-          <div className={clsx("cardWrapper", isModalopen && "hiddenTabletUp")}>
+          {isModalopen ? (
+            <HeadingComponent
+              className="topPhotosHeading"
+              condition={images?.length > 0}
+              content={textContent.vote}
+              defaultValue={textContent.noPhotos}
+            />
+          ) : (
+            <HeadingComponent
+              className="topPhotosHeading"
+              condition={topImages?.length > 0}
+              content={textContent.mostVoted}
+              defaultValue={textContent.noTopPhotos}
+            />
+          )}
+          <div>
             {isModalopen ? (
               <ImageContainer
-                images={topImages}
+                images={images}
                 user={activeUser}
                 isClickable
+                setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+                setBigPhotoURL={setBigPhotoURL}
               />
             ) : (
               <ImageContainer
                 images={topImages}
                 user={activeUser}
                 isClickable={false}
+                setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+                setBigPhotoURL={setBigPhotoURL}
               />
             )}
           </div>
         </section>
 
-        <section className="modalContainer">
-          {isModalopen && <Modal images={images} user={activeUser} />}
-        </section>
+        <div className="buttonWrapper">
+          <button type="button" onClick={toggleModal} className="btn">
+            {isModalopen
+              ? "Abstimmungstool schließen"
+              : "Abstimmungstool öffnen"}
+          </button>
+        </div>
       </DashboardStyled>
     </main>
   );

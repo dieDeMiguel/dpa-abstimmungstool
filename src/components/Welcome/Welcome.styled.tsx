@@ -13,7 +13,7 @@ const WelcomeStyled = styled.main`
   .welcomeWrapper {
     width: 100%;
     height: 100%;
-    display: flex;w
+    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -23,6 +23,7 @@ const WelcomeStyled = styled.main`
       flex-direction: column;
       align-items: center;
       width: 350px;
+      width: 100%;
 
       h1 {
         color: #e3eaa7;

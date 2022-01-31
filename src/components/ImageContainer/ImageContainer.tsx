@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Image from "../Image/Image";
 
 interface ImageInteface {
@@ -16,15 +16,19 @@ interface ImagesProps {
   images: ImageInteface[];
   user: User;
   isClickable: boolean;
+  setIsPhotoComponentOpen: Dispatch<SetStateAction<boolean>>;
+  setBigPhotoURL: Dispatch<SetStateAction<string>>;
 }
 
 export default function ImageContainer({
   images,
   user,
   isClickable,
+  setIsPhotoComponentOpen,
+  setBigPhotoURL,
 }: ImagesProps) {
   return (
-    <div>
+    <div className="cardWrapper">
       {images?.length > 0 ? (
         images.map((image: ImageInteface) => {
           return (
@@ -35,6 +39,8 @@ export default function ImageContainer({
               author={image.author}
               id={image.id}
               isClickable={isClickable}
+              setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+              setBigPhotoURL={setBigPhotoURL}
             />
           );
         })

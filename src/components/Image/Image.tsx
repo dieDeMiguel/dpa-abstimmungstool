@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import ImageStyled from "./Image.styled";
@@ -10,12 +10,16 @@ export default function Image({
   user,
   author,
   isClickable = true,
+  setIsPhotoComponentOpen,
+  setBigPhotoURL,
 }: {
   url: string;
   id: string;
   user: string;
   author: string;
   isClickable: boolean;
+  setIsPhotoComponentOpen: Dispatch<SetStateAction<boolean>>;
+  setBigPhotoURL: Dispatch<SetStateAction<string>>;
 }) {
   const [isImageSelected, setIsImageSelected] = useState<boolean>(false);
 
@@ -52,7 +56,13 @@ export default function Image({
   return (
     <ImageStyled className="imageStyled">
       <div className="check-card flex justify-content-center">
-        <div className={clsx("check-card-item", isClickable && "hoverEffect")}>
+        <div
+          className={clsx(
+            "check-card-item",
+            isClickable && "hoverEffect",
+            !isClickable && "noButton"
+          )}
+        >
           {isClickable ? (
             <label htmlFor={id} className="cardWrapper">
               <input
@@ -64,7 +74,13 @@ export default function Image({
                 checked={isImageSelected}
               />
 
-              <ImageContentComponent url={url} author={author} isVotable />
+              <ImageContentComponent
+                url={url}
+                author={author}
+                isVotable
+                setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+                setBigPhotoURL={setBigPhotoURL}
+              />
             </label>
           ) : (
             <div className="topImageWrapper">
@@ -72,6 +88,8 @@ export default function Image({
                 url={url}
                 author={author}
                 isVotable={false}
+                setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+                setBigPhotoURL={setBigPhotoURL}
               />
             </div>
           )}

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import HorizontalScroll from "react-scroll-horizontal";
 import ModalStyled from "./Modal.styled";
-import Image from "../Image/Image";
+import ImageContainer from "../ImageContainer/ImageContainer";
 
 interface ImageInteface {
   download_url: string;
@@ -17,25 +17,26 @@ interface User {
 interface ImagesProps {
   images: ImageInteface[];
   user: User;
+  setIsPhotoComponentOpen: Dispatch<SetStateAction<boolean>>;
+  setBigPhotoURL: Dispatch<SetStateAction<string>>;
 }
 
-export default function Modal({ images, user }: ImagesProps) {
+export default function Modal({
+  images,
+  user,
+  setIsPhotoComponentOpen,
+  setBigPhotoURL,
+}: ImagesProps) {
   return (
     <ModalStyled>
       <HorizontalScroll className="horizontalScrollComponent">
-        {images?.length > 0 &&
-          images.map((image: ImageInteface) => {
-            return (
-              <Image
-                key={image.download_url}
-                url={image.download_url}
-                user={user.id}
-                author={image.author}
-                id={image.id}
-                isClickable
-              />
-            );
-          })}
+        <ImageContainer
+          images={images}
+          user={user}
+          isClickable
+          setIsPhotoComponentOpen={setIsPhotoComponentOpen}
+          setBigPhotoURL={setBigPhotoURL}
+        />
       </HorizontalScroll>
     </ModalStyled>
   );
