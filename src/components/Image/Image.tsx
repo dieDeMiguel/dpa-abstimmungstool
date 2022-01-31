@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import clsx from "clsx";
 import ImageStyled from "./Image.styled";
 
 export default function Image({
@@ -52,7 +53,7 @@ export default function Image({
   return (
     <ImageStyled className="imageStyled">
       <div className="check-card">
-        <div className="check-card-item">
+        <div className={clsx("check-card-item", isClickable && "hoverEffect")}>
           {isClickable ? (
             <label htmlFor={id}>
               <input
@@ -65,9 +66,10 @@ export default function Image({
               />
 
               <div className="check-card-body flex align-items-center justify-content-center ">
-                <div className="card-icon flex align-items-center">
-                  <img src={url} alt={alt} />
-                </div>
+                <div
+                  className="card-icon flex align-items-center"
+                  style={{ backgroundImage: `url(${url})` }}
+                />
 
                 <div className="check-card-check-icon">
                   <img

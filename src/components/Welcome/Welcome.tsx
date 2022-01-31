@@ -44,9 +44,10 @@ export default function Welcome() {
         <form onSubmit={handleSubmit} className="welcomeForm">
           <h1>Willkommen beim DPA-Abstimmungstool</h1>
           <p>
-            Tragen Sie bitten Ihre Mitarbeiter-E-Mail ein, wir erinnern Sie
-            daran, dass Sie nur einmal abstimmen können.
+            Tragen Sie bitte Ihre Mitarbeiter-E-Mail ein. Sie können nur einmal
+            abstimmen.
           </p>
+
           <input
             type="text"
             className="inputText"

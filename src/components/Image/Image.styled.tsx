@@ -13,8 +13,8 @@ const CardStyled = styled.div`
       border-radius: 5px;
       padding: 1rem;
       overflow: hidden;
-      height: 320px;
-      width: 200px;
+      height: 18rem;
+      width: 13rem;
       background: ${({ theme }) => theme.colors.white};
 
       box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.07),
@@ -27,7 +27,7 @@ const CardStyled = styled.div`
 
     .topImageWrapper {
       cursor: pointer;
-      height: 18rem;
+      height: 16rem;
       display: flex;
       flex-direction: column;
       align-content: space-between;
@@ -44,6 +44,7 @@ const CardStyled = styled.div`
     .check-card-title {
       font-size: ${({ theme }) => theme.fontSize.medium};
       text-align: center;
+      margin: 1rem 0 0;
     }
 
     .check-card-check-icon {
@@ -89,7 +90,11 @@ const CardStyled = styled.div`
     }
 
     .card-icon {
-      max-width: 160px;
+      width: 170px;
+      height: 170px;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-size: cover;
     }
 
     .card-icon img {
@@ -114,14 +119,17 @@ const CardStyled = styled.div`
         width: 100%;
         height: 20px;
       }
-      &:hover {
-        -webkit-transform: scale(1.2);
-        -moz-transform: scale(1.2);
-        transform: scale(1.2);
-        z-index: 10;
-        -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-        -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+
+      &.hoverEffect {
+        &:hover {
+          -webkit-transform: scale(1.2);
+          -moz-transform: scale(1.2);
+          transform: scale(1.2);
+          z-index: 10;
+          -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+          -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        }
       }
     }
   }

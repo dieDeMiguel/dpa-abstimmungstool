@@ -76,12 +76,7 @@ export default function Dashboard() {
               !isModalopen &&
               "Es gibt noch keine ausgewählten Fotos"}
           </h3>
-          <div
-            className={clsx(
-              "cardWrapper flex",
-              isModalopen && "hiddenTabletUp"
-            )}
-          >
+          <div className={clsx("cardWrapper", isModalopen && "hiddenTabletUp")}>
             {isModalopen && topImages?.length > 0
               ? images.map((image: Images) => {
                   return (

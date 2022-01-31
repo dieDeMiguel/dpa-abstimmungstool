@@ -7,7 +7,7 @@ const DashboardStyled = styled.main`
   flex-direction: column;
   height: 100%;
   width: 100vw;
-  padding: 2rem;
+  padding: 0;
   background: #d39247;
 
   &.changeBackground {
@@ -17,6 +17,8 @@ const DashboardStyled = styled.main`
   .heading {
     padding: 0 1rem;
     margin-bottom: 0.5rem;
+    color: #d64161;
+
     h1 {
       font-size: 2rem;
     }
@@ -25,6 +27,7 @@ const DashboardStyled = styled.main`
   .topPhotosHeading {
     padding: 0 1rem;
     margin-bottom: 1rem;
+    color: #6b5b95;
   }
 
   .mobileVotingTool {
@@ -36,7 +39,9 @@ const DashboardStyled = styled.main`
   }
 
   .btn {
-    margin: 2rem;
+    margin: 3rem 2rem;
+    color: white;
+    font-weight: bold;
     width: 150px;
     height: 50px;
     transition: 0.2s linear;

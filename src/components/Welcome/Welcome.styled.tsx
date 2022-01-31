@@ -11,7 +11,9 @@ const WelcomeStyled = styled.main`
   background: #d39247;
 
   .btn {
-    margin: 2rem;
+    margin: 3rem 2rem;
+    color: white;
+    font-weight: bold;
     width: 150px;
     height: 50px;
     transition: 0.2s linear;
@@ -27,7 +29,7 @@ const WelcomeStyled = styled.main`
   .welcomeWrapper {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: flex;w
     justify-content: center;
     align-items: center;
 
@@ -38,8 +40,17 @@ const WelcomeStyled = styled.main`
       align-items: center;
       width: 350px;
 
+      h1 {
+        color: #e3eaa7;
+      }
+
       h2 {
         text-align: center;
+      }
+
+      p {
+        color: #3e4444;
+        font-weight: bold;
       }
 
       input[type="text"] {
@@ -56,11 +67,9 @@ const WelcomeStyled = styled.main`
         border-bottom: 0.3rem solid transparent;
         transition: all 0.3s;
         width: 250px;
+        height: 20px;
       }
     }
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.tablet}) {
   }
 `;
 

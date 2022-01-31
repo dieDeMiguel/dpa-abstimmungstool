@@ -48,7 +48,6 @@ function createVote({ user_id, image_id }) {
 }
 
 function deleteVote({ user_id, image_id }) {
-  console.log("dentro de DELETE VOTE", user_id, image_id);
   return db
     .query(
       "DELETE FROM votes WHERE user_id = $1 AND image_id = $2 RETURNING id",

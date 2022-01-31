@@ -11,8 +11,9 @@ const globalStyles = css`
   }
 
   .cardWrapper {
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
 
   * {
@@ -24,6 +25,7 @@ const globalStyles = css`
   body {
     font-size: 20px;
   }
+
   button {
     border: none;
     background: transparent;
@@ -38,54 +40,17 @@ const globalStyles = css`
     margin: 0;
   }
 
-  .py-2 {
-    padding: ${theme.spacing.s} 0;
-  }
-  .py-6 {
-    padding: ${theme.spacing.l} 0;
-  }
-  .py-3 {
-    padding: ${theme.spacing.m} 0;
-  }
-  .pt-3 {
-    padding-top: ${theme.spacing.m};
-  }
-  .pt-6 {
-    padding-top: ${theme.spacing.l};
-  }
-  .pb-6 {
-    padding-bottom: ${theme.spacing.l};
-  }
-  .pb-3 {
-    padding-bottom: ${theme.spacing.m};
-  }
-  .my-2 {
-    margin: ${theme.spacing.s} 0;
-  }
-  .my-3 {
-    margin: ${theme.spacing.m} 0;
-  }
-  .mt-2 {
-    margin-top: ${theme.spacing.s};
-  }
-  .mb-2 {
-    margin-bottom: ${theme.spacing.s};
-  }
-  .mb-3 {
-    margin-bottom: ${theme.spacing.m};
-  }
-  .mb-6 {
-    margin-bottom: ${theme.spacing.l};
-  }
-  .mt-6 {
-    margin-top: ${theme.spacing.l};
-  }
   .flex {
     display: flex;
   }
   .wrap {
     flex-wrap: wrap;
   }
+
+  .column {
+    flex-direction: column;
+  }
+
   .justify-content-space-between {
     justify-content: space-between;
   }
@@ -104,8 +69,6 @@ const globalStyles = css`
 
   @media only screen and (min-width: ${theme.tablet}) {
     .mainWrapper {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -123,11 +86,26 @@ const globalStyles = css`
     }
 
     .cardWrapper {
-      flex-direction: row;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
     }
 
     .hiddenTabletUp {
       display: none;
+    }
+  }
+
+  @media only screen and (min-width: ${theme.desktop}) {
+    .cardWrapper {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+  }
+
+  @media only screen and (min-width: ${theme.desktop_break_1}) {
+    .cardWrapper {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
     }
   }
 `;
