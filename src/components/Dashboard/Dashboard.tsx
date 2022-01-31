@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import { useLocation } from "react-router";
-import Modal from "../Modal/Modal";
 import DashboardStyled from "./Dashboard.styled";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import HeadingComponent from "../HeadingComponent./HeadingComponent";
@@ -99,7 +98,7 @@ export default function Dashboard() {
               defaultValue={textContent.noTopPhotos}
             />
           )}
-          <div>
+          <div className="overallPhotoWrapper">
             {isModalopen ? (
               <ImageContainer
                 images={images}

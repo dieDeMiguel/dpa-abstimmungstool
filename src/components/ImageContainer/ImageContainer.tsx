@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import clsx from "clsx";
 import Image from "../Image/Image";
 
 interface ImageInteface {
@@ -28,7 +29,7 @@ export default function ImageContainer({
   setBigPhotoURL,
 }: ImagesProps) {
   return (
-    <div className="cardWrapper">
+    <div className={clsx("cardWrapper", isClickable && "makeModal")}>
       {images?.length > 0 ? (
         images.map((image: ImageInteface) => {
           return (

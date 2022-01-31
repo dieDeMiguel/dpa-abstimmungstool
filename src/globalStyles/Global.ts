@@ -108,8 +108,20 @@ const globalStyles = css`
     }
 
     .cardWrapper {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
+      &.makeModal {
+      }
+    }
+
+    .cardWrapper {
+      height: 500px;
+      width: 90vw;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+
+      &.makeModal {
+        grid-auto-flow: column;
+      }
     }
 
     .hiddenTabletUp {
