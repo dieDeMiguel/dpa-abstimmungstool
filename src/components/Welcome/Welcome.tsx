@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import e from "express";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import WelcomeStyled from "./Welcome.styled";
+import CheckEmail from "../../utils/CheckEmail";
 
 interface UserName {
   username: string | null;
@@ -26,6 +26,13 @@ export default function Welcome() {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    const isEmailFormat = CheckEmail(userName);
+
+    if (!isEmailFormat) {
+      setErrorMessage("Falsches E-Mail-Format");
+      return;
+    }
+
     if (userName === undefined || userName === null || !userName) {
       setErrorMessage("Benutzername wird benötigt");
       return;

@@ -1,10 +1,12 @@
 # Available Scripts
 
+### After cloning run `yarn` or `npm install`
+
 ### You neede to have postgresql installed in your computer. Database SCHEMA is in the `setup.sql` file in root. To populate the DDBB with images run `node import.js`
 
 ### You need to run a local server in order to use the application `node server/server.js`
 
-### Then `yarn start`
+### Then `yarn start` or `npm run dev`
 
 ### You are good to go. Enjoy.
 
