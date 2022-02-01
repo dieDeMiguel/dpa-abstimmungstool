@@ -45,11 +45,9 @@ export default function ImageContentComponent({
           <h4 className="check-card-title">{author}</h4>
         </div>
 
-        {isVotable && (
-          <button className="btn btnCard" type="button" onClick={handleClick}>
-            Foto ansehen
-          </button>
-        )}
+        <button className="btn btnCard" type="button" onClick={handleClick}>
+          Foto ansehen
+        </button>
       </div>
     </>
   );

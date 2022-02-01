@@ -120,7 +120,11 @@ export default function Dashboard() {
         </section>
 
         <div className="buttonWrapper">
-          <button type="button" onClick={toggleModal} className="btn">
+          <button
+            type="button"
+            onClick={toggleModal}
+            className="btn hiddenDesktopUp"
+          >
             {isModalopen
               ? "Abstimmungstool schließen"
               : "Abstimmungstool öffnen"}

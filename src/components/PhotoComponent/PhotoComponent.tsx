@@ -12,7 +12,11 @@ export default function PhotoComponent({
     <PhotoComponentStyled>
       <div className="innerWrapper">
         <div className="image" style={{ backgroundImage: `url(${url})` }} />
-        <button type="button" onClick={() => setIsPhotoComponentOpen(false)}>
+        <button
+          className="btn close"
+          type="button"
+          onClick={() => setIsPhotoComponentOpen(false)}
+        >
           X
         </button>
       </div>

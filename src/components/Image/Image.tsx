@@ -56,13 +56,7 @@ export default function Image({
   return (
     <ImageStyled className="imageStyled">
       <div className="check-card flex justify-content-center">
-        <div
-          className={clsx(
-            "check-card-item",
-            isClickable && "hoverEffect",
-            !isClickable && "noButton"
-          )}
-        >
+        <div className={clsx("check-card-item")}>
           {isClickable ? (
             <label htmlFor={id} className="cardWrapper">
               <input

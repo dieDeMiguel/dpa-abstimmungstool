@@ -86,6 +86,10 @@ const globalStyles = css`
     border: 2px solid transparent;
     background-color: rgb(161, 211, 255);
     border-radius: 5px;
+
+    &.close {
+      font-size: 2rem;
+    }
   }
 
   @media only screen and (min-width: ${theme.tablet}) {
@@ -113,14 +117,17 @@ const globalStyles = css`
     }
 
     .cardWrapper {
-      height: 500px;
-      width: 90vw;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-
       &.makeModal {
+        height: 500px;
+        width: 90vw;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
         grid-auto-flow: column;
+
+        &:hover {
+          overflow-x: scroll;
+        }
       }
     }
 
@@ -134,11 +141,15 @@ const globalStyles = css`
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;
     }
+
+    .hiddenDesktopUp {
+      display: none;
+    }
   }
 
   @media only screen and (min-width: ${theme.desktop_break_1}) {
     .cardWrapper {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr;
     }
   }

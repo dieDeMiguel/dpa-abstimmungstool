@@ -32,7 +32,6 @@ const DashboardStyled = styled.div`
 
   .topPhotosHeading {
     padding: 0 1rem;
-    margin-bottom: 1rem;
     color: #6b5b95;
   }
 

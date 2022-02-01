@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 /** Card styles */
 
 const CardStyled = styled.div`
-  padding: 1rem;
+  padding: 1rem 1rem 7rem;
+
   .check-card {
     width: 100%;
 

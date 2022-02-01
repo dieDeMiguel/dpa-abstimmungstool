@@ -26,6 +26,11 @@ export default function Welcome() {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    if (userName === undefined || userName === null || userName) {
+      setErrorMessage("Benutzername wird benötigt");
+      return;
+    }
+
     axios.get(`/api/user/${userName}`).then((result) => {
       if (result.data.result.length === 0) {
         axios.post("/api/user", { username: userName }).then((createdUser) => {
