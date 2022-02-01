@@ -26,7 +26,7 @@ export default function Welcome() {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (userName === undefined || userName === null || userName) {
+    if (userName === undefined || userName === null || !userName) {
       setErrorMessage("Benutzername wird benötigt");
       return;
     }
